@@ -1,12 +1,40 @@
 import React, { Component } from 'react'
-import { View, Animated, Text } from 'react-native'
+import {
+  View,
+  Animated,
+  Text,
+  PanResponder
+} from 'react-native'
 
 
 class Deck extends Component {
-  render(){
+  constructor(props) {
+    super(props);
+
+    const panResponder = PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onPanResponderMove: (event, gesture) => {
+        console.log(gesture);
+      },
+      onPanResponderRelease: () => {}
+    });
+
+    this.panResponder = panResponder;
+
+  }
+
+  renderCards() {
+    return this.props.data.map(item => {
+      return this.props.renderCard(item)
+    });
+  }
+
+  render() {
     return (
-      <View />
-    )
+      <View>
+        {this.renderCards()}
+      </View>
+    )l
   }
 }
 
