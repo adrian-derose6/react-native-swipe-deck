@@ -15,7 +15,7 @@ const DATA = [
   { id: 8, text: 'Card #8', uri: 'http://imgs.abduzeedo.com/files/paul0v2/unsplash/unsplash-01.jpg' },
 ];
 
-class App extends React {
+class App extends Component {
   renderCard(item) {
     return (
       <Card
