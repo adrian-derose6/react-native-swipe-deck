@@ -4,7 +4,9 @@ import {
   Animated,
   Text,
   PanResponder,
-  Dimensions
+  Dimensions,
+  LayoutAnimation,
+  UIManager
 } from 'react-native'
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -107,12 +109,16 @@ class Deck extends Component {
         <Animated.View
           style={[styles.cardStyle, { top: 5 * (i - this.state.index)}]}
           key={item.id}
-
         >
           {this.props.renderCard(item)}
         </Animated.View>
       );
     }).reverse();
+  }
+
+  componentWillUpdate(prevProps, nextProps) {
+    UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+    LayoutAnimation.spring();
   }
 
   render() {
