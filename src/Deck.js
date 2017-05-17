@@ -41,12 +41,22 @@ class Deck extends Component {
       }
     });
 
-
     this.position = position;
     this.panResponder = panResponder;
     this.state = {
       index: 0
     }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.data !== this.props.data) {
+      this.setState({ index: 0});
+    }
+  }
+
+  componentWillUpdate() {
+    UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+    LayoutAnimation.spring();
   }
 
   resetPosition() {
@@ -114,11 +124,6 @@ class Deck extends Component {
         </Animated.View>
       );
     }).reverse();
-  }
-
-  componentWillUpdate(prevProps, nextProps) {
-    UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
-    LayoutAnimation.spring();
   }
 
   render() {
